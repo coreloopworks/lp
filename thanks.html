@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>購入ありがとうございます | AIエージェント実務プロンプトパック vol.1</title>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Noto Sans JP",sans-serif;background:#f8fafc;color:#1e293b;padding:24px}
+    .hero{background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;border-radius:16px;padding:40px 32px;text-align:center;max-width:800px;margin:0 auto 32px}
+    .hero h1{font-size:26px;font-weight:800;margin-bottom:8px}
+    .hero p{font-size:15px;opacity:.88;line-height:1.7}
+    .dl-btn{display:inline-block;background:#fff;color:#6366f1;font-weight:700;font-size:15px;padding:12px 28px;border-radius:10px;text-decoration:none;margin-top:20px;cursor:pointer;border:none}
+    .dl-btn:hover{opacity:.88}
+    .container{max-width:800px;margin:0 auto}
+    .category{background:#fff;border-radius:14px;box-shadow:0 2px 12px rgba(0,0,0,.06);margin-bottom:24px;overflow:hidden}
+    .cat-header{background:linear-gradient(90deg,#6366f1,#8b5cf6);color:#fff;padding:16px 24px;font-weight:700;font-size:16px}
+    .prompt-item{padding:20px 24px;border-bottom:1px solid #f1f5f9}
+    .prompt-item:last-child{border-bottom:none}
+    .prompt-title{font-weight:700;font-size:14px;color:#6366f1;margin-bottom:10px}
+    .prompt-body{background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:14px;font-family:"Courier New",monospace;font-size:12.5px;line-height:1.75;white-space:pre-wrap;word-break:break-all;position:relative}
+    .copy-btn{position:absolute;top:8px;right:8px;background:#6366f1;color:#fff;border:none;border-radius:6px;padding:4px 12px;font-size:11px;cursor:pointer;font-weight:600}
+    .copy-btn:hover{background:#4f46e5}
+    .copy-btn.copied{background:#10b981}
+    .footer{text-align:center;padding:32px 0;font-size:12px;color:#94a3b8}
+    .notice{background:#fffbeb;border:1px solid #fcd34d;border-radius:10px;padding:14px 18px;font-size:13px;color:#92400e;margin-bottom:24px;line-height:1.7}
+  </style>
+</head>
+<body>
+  <div class="hero">
+    <div style="font-size:48px;margin-bottom:12px">🎉</div>
+    <h1>ご購入ありがとうございます！</h1>
+    <p>AIエージェント実務プロンプトパック vol.1（全40本）をお届けします。<br>各プロンプトの「コピー」ボタンでAIにそのまま貼り付けてお使いください。</p>
+    <button class="dl-btn" onclick="downloadAll()">📥 全プロンプトをテキスト保存</button>
+  </div>
+
+  <div class="container">
+    <div class="notice">
+      ⚠️ このページのURLは購入者専用です。第三者への共有・再配布はご遠慮ください。<br>
+      ご不明点は <strong>support@coreloopworks.com</strong> までご連絡ください。
+    </div>
+
+    <!-- カテゴリ1 -->
+    <div class="category">
+      <div class="cat-header">📊 カテゴリ1: 調査・リサーチ（4本）</div>
+      <div class="prompt-item">
+        <div class="prompt-title">R-01 競合サービス調査</div>
+        <div class="prompt-body" id="R-01">あなたは優秀なリサーチャーです。
+以下の条件でサービスの競合調査を行い、表形式でまとめてください。
+
+【調査対象サービス/市場】: {サービス名または市場}
+【調査項目】: サービス名、価格帯、主な機能、ターゲット、強み、弱み
+【調査件数】: 上位5〜8件
+
+最後に「競合の共通課題」と「差別化できそうな点」を3つずつ挙げてください。<button class="copy-btn" onclick="copyPrompt('R-01',this)">コピー</button></div>
+      </div>
+      <div class="prompt-item">
+        <div class="prompt-title">R-02 市場規模・トレンド調査</div>
+        <div class="prompt-body" id="R-02">あなたはビジネスリサーチの専門家です。
+以下のテーマについて、市場規模・成長トレンド・主要プレイヤーをまとめてください。
+
+【テーマ】: {調査テーマ}
+【用途】: {なぜ調べるか。例: 新規事業検討、投資判断など}
+
+出力形式:
+1. 市場規模（現在・3年後予測）
+2. 成長ドライバー（上位3つ）
+3. 主要プレイヤーと市場シェア（わかる範囲で）
+4. リスク・障壁
+5. あなたの総評（3行以内）<button class="copy-btn" onclick="copyPrompt('R-02',this)">コピー</button></div>
+      </div>
+      <div class="prompt-item">
+        <div class="prompt-title">R-03 記事・情報の要点抽出</div>
+        <div class="prompt-body" id="R-03">以下のテキストから、ビジネス判断に役立つ重要情報だけを抽出してください。
+
+【テキスト】:
+{貼り付けるテキスト}
+
+出力:
+- 結論（1〜2行）
+- キーファクト（箇条書き5点以内）
+- 自分のビジネスへの示唆（2〜3行）<button class="copy-btn" onclick="copyPrompt('R-03',this)">コピー</button></div>
+      </div>
+      <div class="prompt-item">
+        <div class="prompt-title">R-04 顧客インタビュー設計</div>
+        <div class="prompt-body" id="R-04">以下の商品・サービスについて、顧客インタビューの設計をしてください。
+
+【商品・サービス】: {名称と概要}
+【インタビュー目的】: {例: 購買動機の把握、改善点の発見}
+【想定対象者】: {ペルソナ}
+
+出力:
+1. インタビュー全体の流れ（5ステップ）
+2. 質問リスト（オープン質問中心に10〜15問）
+3. 深掘りトリガーフレーズ（3〜5個）<button class="copy-btn" onclick="copyPrompt('R-04',this)">コピー</button></div>
+      </div>
+    </div>
+
+    <!-- カテゴリ2 -->
+    <div class="category">
+      <div class="cat-header">📝 カテゴリ2: 要約・整理（4本）</div>
+      <div class="prompt-item">
+        <div class="prompt-title">S-01 会議・打ち合わせメモの整理</div>
+        <div class="prompt-body" id="S-01">以下の会議メモを整理してください。
+
+【メモ】:
+{会議メモをここに貼り付け}
+
+出力形式:
+## 決定事項
+## 課題・懸念点
+## 次のアクション（担当者・期日付き）
+## 共有すべき情報
+
+箇条書きで簡潔にまとめ、冗長な表現は省いてください。<button class="copy-btn" onclick="copyPrompt('S-01',this)">コピー</button></div>
+      </div>
+      <div class="prompt-item">
+        <div class="prompt-title">S-02 長文ドキュメントの要約</div>
+        <div class="prompt-body" id="S-02">以下のドキュメントを要約してください。
+
+【ドキュメント】:
+{テキストをここに貼り付け}
+
+【要約の目的】: {例: 上司への報告、社内共有、意思決定のため}
+【要約の長さ】: {例: 200字以内、A4半ページ程度}
+
+重要度の高い情報を優先し、数字・固有名詞は省略しないでください。<button class="copy-btn" onclick="copyPrompt('S-02',this)">コピー</button></div>
+      </div>
+      <div class="prompt-item">
+        <div class="prompt-title">S-03 複数案の比較整理</div>
+        <div class="prompt-body" id="S-03">以下の選択肢を比較・整理してください。
+
+【選択肢】:
+{案1の説明}
+{案2の説明}
+{案3の説明（あれば）}
+
+【判断基準】: {例: コスト、スピード、リスクの低さ}
+
+出力:
+1. 比較表（各判断基準×各案）
+2. 各案の一言評価
+3. あなたが推奨する案とその理由<button class="copy-btn" onclick="copyPrompt('S-03',this)">コピー</button></div>
+      </div>
+      <div class="prompt-item">
+        <div class="prompt-title">S-04 PDF・資料のポイント整理</div>
+        <div class="prompt-body" id="S-04">以下の資料内容について、次の観点で整理してください。
+
+【資料内容】:
+{資料のテキストをここに貼り付け}
+
+整理観点:
+1. この資料が言いたいこと（主張・結論）
+2. その根拠・エビデンス
+3. 前提条件・制約
+4. 不明点・要確認事項
+5. 自分たちへのアクション示唆<button class="copy-btn" onclick="copyPrompt('S-04',this)">コピー</button></div>
+      </div>
+    </div>
+
+    <!-- カテゴリ3 -->
+    <div class="category">
+      <div class="cat-header">✉️ カテゴリ3: メール・文章作成（5本）</div>
+      <div class="prompt-item">
+        <div class="prompt-title">E-01 ビジネスメール作成（依頼）</div>
+        <div class="prompt-body" id="E-01">以下の条件でビジネスメールを作成してください。
+
+【送信者】: {自分の役職・名前}
+【宛先】: {相手の役職・関係性}
+【目的】: {例: ○○の打ち合わせをお願いしたい}
+【伝えたい要点】: {箇条書きで}
+【トーン】: {例: 丁寧、フランク、フォーマル}
+
+件名・本文・締め・署名のセットで出力してください。<button class="copy-btn" onclick="copyPrompt('E-01',this)">コピー</button></div>
+      </div>
+      <div class="prompt-item">
+        <div class="prompt-title">E-02 ビジネスメール作成（お断り）</div>
+        <div class="prompt-body" id="E-02">以下の条件で、角が立たないお断りメールを作成してください。
+
+【断る内容】: {何をお断りするか}
+【理由（相手に伝えてよい範囲）】: {理由}
+【今後の関係性】: {続けたい / 一旦終了 / どちらでも}
+【トーン】: {丁寧・誠実}
+
+今後の関係を損なわない表現を心がけてください。<button class="copy-btn" onclick="copyPrompt('E-02',this)">コピー</button></div>
+      </div>
+      <div class="prompt-item">
+        <div class="prompt-title">E-03 提案書・企画書の骨格作成</div>
+        <div class="prompt-body" id="E-03">以下の条件で提案書の骨格を作成してください。
+
+【提案名】: {タイトル}
+【提案先】: {社内 or 社外、相手の属性}
+【提案の目的】: {何を承認・採択してもらいたいか}
+【背景・課題】: {現状と問題点}
+【提案内容の概要】: {解決策のアイデア}
+【期待効果】: {数値目標があれば}
+
+出力: スライド構成案（各スライドのタイトルと要点3行以内）<button class="copy-btn" onclick="copyPrompt('E-03',this)">コピー</button></div>
+      </div>
+      <div class="prompt-item">
+        <div class="prompt-title">E-04 SNS投稿文作成</div>
+        <div class="prompt-body" id="E-04">以下の条件でSNS投稿文を作成してください。
+
+【プラットフォーム】: {X(Twitter) / note / LinkedIn など}
+【テーマ】: {何について投稿するか}
+【ターゲット読者】: {どんな人に届けたいか}
+【トーン】: {例: 専門的、親しみやすい、挑発的}
+【文字数】: {例: 140字以内、300字程度}
+
+ハッシュタグ案も3つ提示してください。<button class="copy-btn" onclick="copyPrompt('E-04',this)">コピー</button></div>
+      </div>
+      <div class="prompt-item">
+        <div class="prompt-title">E-05 FAQ・よくある質問の作成</div>
+        <div class="prompt-body" id="E-05">以下のサービス・商品についてFAQを作成してください。
+
+【サービス・商品名】: {名称}
+【概要】: {説明}
+【想定ユーザー】: {ペルソナ}
+
+出力:
+- よくある質問と回答を10〜15問
+- 質問はユーザー視点の自然な言葉で
+- 回答は簡潔に2〜4文で
+
+カテゴリ（料金・使い方・サポート等）で分類してください。<button class="copy-btn" onclick="copyPrompt('E-05',this)">コピー</button></div>
+      </div>
+    </div>
+
+    <!-- カテゴリ4 -->
+    <div class="category">
+      <div class="cat-header">💡 カテゴリ4: 企画・アイデア出し（4本）</div>
+      <div class="prompt-item">
+        <div class="prompt-title">P-01 新規事業・サービスアイデア出し</div>
+        <div class="prompt-body" id="P-01">以下の条件で新規事業・サービスのアイデアを出してください。
+
+【対象市場・領域】: {例: 中小企業向けAI活用}
+【制約条件】: {例: 開発不要、初期費用50万円以内、3ヶ月で検証可能}
+【重視すること】: {例: 収益化スピード、低リスク}
+
+出力:
+- アイデア5〜8案（各案: 名称・概要・ターゲット・収益モデル・課題）
+- 最も推奨する案とその理由<button class="copy-btn" onclick="copyPrompt('P-01',this)">コピー</button></div>
+      </div>
+      <div class="prompt-item">
+        <div class="prompt-title">P-02 コンテンツ企画（記事・動画・SNS）</div>
+        <div class="prompt-body" id="P-02">以下の条件でコンテンツ企画を立案してください。
+
+【ブランド・サービス】: {概要}
+【ターゲット読者・視聴者】: {ペルソナ}
+【目的】: {例: 認知拡大、リード獲得、ファン化}
+【媒体】: {例: Zenn、note、YouTube、X}
+【期間】: {例: 1ヶ月分}
+
+出力: コンテンツ案10本（タイトル・概要・狙い）<button class="copy-btn" onclick="copyPrompt('P-02',this)">コピー</button></div>
+      </div>
+      <div class="prompt-item">
+        <div class="prompt-title">P-03 課題解決アイデア出し（ブレスト）</div>
+        <div class="prompt-body" id="P-03">以下の課題についてブレインストーミングをしてください。
+
+【課題】: {解決したい問題}
+【背景・制約】: {前提条件や制約}
+【現在試していること】: {すでに取り組んでいること}
+
+出力:
+- 解決アイデア10案（制約を無視した自由な発想も含む）
+- 各案の実現難易度（高/中/低）
+- すぐ試せる「小さな実験」案3つ<button class="copy-btn" onclick="copyPrompt('P-03',this)">コピー</button></div>
+      </div>
+      <div class="prompt-item">
+        <div class="prompt-title">P-04 KPI・目標設定の壁打ち</div>
+        <div class="prompt-body" id="P-04">以下のプロジェクト・事業についてKPI設定の壁打ちをしてください。
+
+【プロジェクト・事業概要】: {説明}
+【最終ゴール】: {達成したい状態}
+【期間】: {例: 3ヶ月}
+【現在の状況】: {スタート地点}
+
+出力:
+1. 推奨KPI（3〜5個、測定方法付き）
+2. 週次・月次チェックポイント
+3. 「これが起きたら軌道修正すべき」警戒サイン3つ<button class="copy-btn" onclick="copyPrompt('P-04',this)">コピー</button></div>
+      </div>
+    </div>
+
+    <!-- カテゴリ5 -->
+    <div class="category">
+      <div class="cat-header">💻 カテゴリ5: コード・技術補助（3本）</div>
+      <div class="prompt-item">
+        <div class="prompt-title">C-01 コードレビュー・改善提案</div>
+        <div class="prompt-body" id="C-01">以下のコードをレビューし、改善点を指摘してください。
+
+【言語】: {例: Python, JavaScript}
+【コード】:
+{コードをここに貼り付け}
+
+観点:
+1. バグ・エラーリスク
+2. 可読性の問題
+3. パフォーマンス改善余地
+4. セキュリティ上の懸念
+
+各指摘に改善コードのサンプルを添えてください。<button class="copy-btn" onclick="copyPrompt('C-01',this)">コピー</button></div>
+      </div>
+      <div class="prompt-item">
+        <div class="prompt-title">C-02 処理の自動化スクリプト作成</div>
+        <div class="prompt-body" id="C-02">以下の作業を自動化するスクリプトを作成してください。
+
+【言語】: {例: Python, Google Apps Script}
+【自動化したい作業】: {手順を詳しく}
+【入力データ】: {何を入力とするか}
+【出力・結果】: {何を出力・実行するか}
+【エラー処理】: {例: ログ出力、リトライ}
+
+コメント付きで、初心者でも読めるコードにしてください。<button class="copy-btn" onclick="copyPrompt('C-02',this)">コピー</button></div>
+      </div>
+      <div class="prompt-item">
+        <div class="prompt-title">C-03 API連携の設計支援</div>
+        <div class="prompt-body" id="C-03">以下の要件でAPI連携の設計を支援してください。
+
+【連携するサービス】: {例: SlackとGoogleスプレッドシート}
+【やりたいこと】: {処理の流れ}
+【技術スタック】: {使用言語・フレームワーク}
+【制約】: {例: サーバーレス、無料枠内}
+
+出力:
+1. 処理フロー図（テキストで）
+2. 必要なAPI・認証方式
+3. 実装ステップ（5〜8ステップ）
+4. ハマりやすいポイントと対策<button class="copy-btn" onclick="copyPrompt('C-03',this)">コピー</button></div>
+      </div>
+    </div>
+
+
+
+    <!-- カテゴリ7: 営業・顧客対応 -->
+    <div class="category">
+      <div class="cat-header">🤝 カテゴリ7: 営業・顧客対応（3本）</div>
+      <div class="prompt-item">
+        <div class="prompt-title">N-01 新規顧客への提案メール作成</div>
+        <div class="prompt-body" id="N-01">あなたは成約率の高いBtoBセールスライターです。
+以下の情報で新規顧客向けの提案メールを作成してください。
+
+【自社サービス/商品】: {提供するサービスや商品の概要}
+【顧客の業種・規模】: {例: IT企業・従業員50名}
+【顧客の想定課題】: {顧客が抱えていると思われる問題}
+【提案の訴求ポイント】: {自社の強み・差別化ポイント}
+【希望するネクストアクション】: {例: 15分オンライン面談}
+
+出力:
+- 件名（開封率を高めるもの）
+- 本文（課題共感 → 解決策提示 → 実績/信頼 → CTA の流れ）
+- 追伸（1行・個人的なメッセージ感）
+文字数: 400〜500字<button class="copy-btn" onclick="copyPrompt('N-01',this)">コピー</button></div>
+      </div>
+      <div class="prompt-item">
+        <div class="prompt-title">N-02 値上げ・料金改定の告知文</div>
+        <div class="prompt-body" id="N-02">あなたは顧客関係を重視する広報担当者です。
+以下の条件で、既存顧客への料金改定通知文を作成してください。
+
+【現在の価格】: {例: 月額¥9,800}
+【新しい価格】: {例: 月額¥12,800}
+【改定理由】: {例: サービス品質向上・原価上昇}
+【改定日】: {YYYY年MM月DD日}
+【既存顧客への特典】: {例: 3ヶ月猶予期間など}
+
+出力:
+1. 件名
+2. 感謝の言葉（既存のお付き合いへの感謝）
+3. 改定内容と理由（正直・誠実に）
+4. 特典・移行措置の案内
+5. 問い合わせ先
+トーン: 誠実・透明・顧客ファースト<button class="copy-btn" onclick="copyPrompt('N-02',this)">コピー</button></div>
+      </div>
+      <div class="prompt-item">
+        <div class="prompt-title">N-03 クレーム・苦情対応メール</div>
+        <div class="prompt-body" id="N-03">あなたはカスタマーサポートの専門家です。
+以下の状況でクレーム対応メールを作成してください。
+
+【クレームの内容】: {顧客からの苦情・問題の詳細}
+【発生した事象】: {いつ・何が起きたか}
+【自社の過失度】: {明らかに自社責任 / 双方に誤解 / 顧客側の誤解}
+【対応策・補償】: {返金・再送・割引など}
+
+出力:
+1. お詫び（誠実で具体的）
+2. 事実確認・経緯説明
+3. 再発防止策
+4. 解決策・補償の提示
+5. 締めの言葉（信頼回復のコミット）
+文字数: 500字以内<button class="copy-btn" onclick="copyPrompt('N-03',this)">コピー</button></div>
+      </div>
+    </div>
+
+    <!-- ボーナスプロンプト -->
+    <div class="category" style="border:2px solid #6366f1">
+      <div class="cat-header" style="background:linear-gradient(90deg,#6366f1,#8b5cf6)">🎁 ボーナス: 購入者限定プロンプト（5本追加）</div>
+      <div class="prompt-item">
+        <div class="prompt-title">B-01 週次振り返り＆改善サイクル</div>
+        <div class="prompt-body" id="B-01">あなたはプロのビジネスコーチです。
+以下の情報を元に「週次振り返りレポート」を作成してください。
+
+【今週やったこと】: {箇条書きで記載}
+【数字・指標】: {例: 売上0円、LP訪問50件、記事PV200}
+【上手くいったこと】: {1〜3つ}
+【上手くいかなかったこと】: {1〜3つ}
+【来週の目標】: {具体的に}
+
+出力:
+1. 今週の総評（3行）
+2. 継続すべき行動（3つ）
+3. 改善すべき行動（3つ）
+4. 来週の最重要アクション1つ<button class="copy-btn" onclick="copyPrompt('B-01',this)">コピー</button></div>
+      </div>
+      <div class="prompt-item">
+        <div class="prompt-title">B-02 SNS投稿文一括生成（1記事→5プラットフォーム）</div>
+        <div class="prompt-body" id="B-02">以下のコンテンツを元に、各SNSに最適化した投稿文を生成してください。
+
+【元コンテンツ】: {記事タイトル・要点・URL}
+
+出力:
+1. X(Twitter): 140字以内、ハッシュタグ3つ
+2. LinkedIn: 200字、ビジネス向け
+3. note見出し文: 50字以内
+4. Instagram キャプション: 絵文字多め、ハッシュタグ10個
+5. Zenn記事サブタイトル: 60字以内<button class="copy-btn" onclick="copyPrompt('B-02',this)">コピー</button></div>
+      </div>
+      <div class="prompt-item">
+        <div class="prompt-title">B-03 プレスリリース作成</div>
+        <div class="prompt-body" id="B-03">以下の情報を元にプレスリリースを作成してください。
+
+【発表内容】: {新サービス/新機能/イベント等}
+【会社名・担当者】: {会社名 / 担当者名}
+【ターゲット媒体】: {IT系/ビジネス系等}
+【発表日】: {YYYY-MM-DD}
+
+構成: 見出し/リード文(5W1H)/本文/担当者コメント/会社概要<button class="copy-btn" onclick="copyPrompt('B-03',this)">コピー</button></div>
+      </div>
+      <div class="prompt-item">
+        <div class="prompt-title">B-04 差別化ストーリー作成</div>
+        <div class="prompt-body" id="B-04">以下の商品の「差別化ストーリー」を作成してください。
+
+【自社商品】: {名称・概要・価格}
+【競合】: {競合A・B の特徴}
+【自社の強み】: {3〜5つ}
+【顧客の悩み】: {主な課題}
+
+出力: 核心メッセージ1文/競合比較表/説得ストーリー400字/よくある疑問3つへの回答<button class="copy-btn" onclick="copyPrompt('B-04',this)">コピー</button></div>
+      </div>
+      <div class="prompt-item">
+        <div class="prompt-title">B-05 採用・求人票作成</div>
+        <div class="prompt-body" id="B-05">以下の条件で採用求人票を作成してください。
+
+【職種】: {例: AIエンジニア、マーケター}
+【会社・チーム概要】: {事業内容、チーム規模}
+【業務内容】: {主な担当業務}
+【必須スキル】: {最低条件}
+【雇用形態・待遇】: {正社員/業務委託、給与等}
+
+構成: キャッチコピー/やりがい/業務詳細/求める人物像/応募方法<button class="copy-btn" onclick="copyPrompt('B-05',this)">コピー</button></div>
+      </div>
+    </div>
+
+    <!-- カテゴリ6: 生産性・時間管理 -->
+    <div class="category">
+      <div class="cat-header">⏱️ カテゴリ6: 生産性・時間管理（3本）</div>
+      <div class="prompt-item">
+        <div class="prompt-title">T-01 週次振り返りレポート自動生成</div>
+        <div class="prompt-body" id="T-01">あなたは生産性向上の専門家です。
+以下の情報をもとに、週次振り返りレポートを作成してください。
+
+【期間】: {YYYY年MM月DD日〜MM月DD日}
+【今週の主な成果】: {箇条書きで入力}
+【課題・問題】: {遭遇した困難と対処法}
+【未完了タスク】: {持ち越しタスク}
+【来週の目標】: {3〜5個}
+
+出力形式:
+1. 今週のハイライト（1〜2文の要約）
+2. 達成事項（✅ 箇条書き）
+3. 課題と学び（箇条書き）
+4. 来週の優先事項（順位付き）
+5. 一言コメント（モチベーションを維持するポジティブな締め）<button class="copy-btn" onclick="copyPrompt('T-01',this)">コピー</button></div>
+      </div>
+      <div class="prompt-item">
+        <div class="prompt-title">T-02 1on1ミーティング準備シート</div>
+        <div class="prompt-body" id="T-02">あなたは優秀なマネージャーです。
+以下の状況で1on1ミーティングの準備シートを作成してください。
+
+【部下の役割・担当業務】: {役割・担当プロジェクト}
+【前回1on1からの経過】: {週数または日数}
+【最近気になっている点】: {業務成果・行動・発言など}
+【今期の目標】: {KPIや目標設定内容}
+
+出力:
+1. 確認すべき業務進捗トピック（3〜5個）
+2. キャリア・成長に関する質問（2〜3個）
+3. 心理的安全性を高めるオープニング質問（1個）
+4. フィードバックすべき点（ポジティブ・改善点各1つ）
+5. 次回1on1までのアクション確認事項<button class="copy-btn" onclick="copyPrompt('T-02',this)">コピー</button></div>
+      </div>
+      <div class="prompt-item">
+        <div class="prompt-title">T-03 プロジェクト進捗報告メール</div>
+        <div class="prompt-body" id="T-03">以下の情報をもとに、上司や関係者への進捗報告メールを書いてください。
+
+【プロジェクト名】: {プロジェクト名}
+【報告対象】: {上司/クライアント/関係部署}
+【報告期間】: {期間}
+【進捗ステータス】: {順調 / やや遅延 / 遅延中}
+【今期の達成事項】: {完了したタスク・マイルストーン}
+【課題・リスク】: {現在直面している問題点}
+【次期の予定】: {次のマイルストーンと期日}
+
+スタイル: 簡潔・事実ベース・行動指向
+文字数: 400〜600字
+結語に次回報告予定日を含めること<button class="copy-btn" onclick="copyPrompt('T-03',this)">コピー</button></div>
+      </div>
+    </div>
+
+    <!-- カテゴリ8: SNS・マーケティング -->
+    <div class="category">
+      <div class="cat-header">📱 カテゴリ8: SNS・マーケティング（3本）</div>
+      <div class="prompt-item">
+        <div class="prompt-title">SM-01 LinkedIn投稿文（BtoB専門家向け）</div>
+        <div class="prompt-body" id="SM-01">あなたはBtoBマーケティングの専門家です。
+以下の情報でLinkedIn投稿文を作成してください。
+
+【テーマ・伝えたいこと】: {例: AIツールの業務活用で得た学び}
+【対象読者】: {例: 経営者・管理職・エンジニア}
+【自分の立場・経験】: {例: 5年のプロダクトマネジメント経験}
+【含めたい具体的事例・数字】: {例: 作業時間が週5時間→1時間に削減}
+【CTA（最後に誘導したいこと）】: {例: コメントで意見を聞く / プロフィールを見てもらう}
+
+出力形式:
+1. フック（最初の1〜2行：スクロールを止める一言）
+2. 本文（200〜300字：具体的なストーリー or 学び）
+3. 箇条書き3点（スキャン読者向けの要点）
+4. クロージング＋CTA
+絵文字: 適度に使用（BtoB向け、過剰にしない）<button class="copy-btn" onclick="copyPrompt('SM-01',this)">コピー</button></div>
+      </div>
+      <div class="prompt-item">
+        <div class="prompt-title">SM-02 X(Twitter)スレッド作成</div>
+        <div class="prompt-body" id="SM-02">あなたはバイラルコンテンツ専門家です。
+以下のテーマでXスレッドを作成してください。
+
+【テーマ】: {例: ChatGPTを使った業務効率化の実例}
+【ターゲット】: {例: 副業・フリーランス・会社員}
+【共有したい知識・経験】: {具体的なノウハウや体験}
+【スレッド本数】: {例: 5〜8ツイート}
+
+出力形式（各ツイート140字以内）:
+ツイート1: フック（「〇〇を知らないと損する」系）
+ツイート2〜N-1: 本論（各1ポイントずつ）
+ツイートN: まとめ＋CTA（フォロー促進 or リンク誘導）<button class="copy-btn" onclick="copyPrompt('SM-02',this)">コピー</button></div>
+      </div>
+      <div class="prompt-item">
+        <div class="prompt-title">SM-03 ブログ記事のSEOタイトル5案生成</div>
+        <div class="prompt-body" id="SM-03">あなたはSEOライティングの専門家です。
+以下の条件でブログ記事タイトル案を5つ作成してください。
+
+【記事のメインキーワード】: {例: ChatGPT プロンプト}
+【対象読者】: {例: 初心者〜中級者のビジネスパーソン}
+【記事の主な内容】: {例: コピペで使えるプロンプト10選と使い方}
+【競合記事との差別化ポイント】: {例: 穴埋め式・業務特化}
+
+条件:
+- 32文字以内（Google表示上限）
+- 数字を含む（例: 10選、3つの方法）
+- ベネフィットが明確（「〜できる」「〜が解決する」）
+- 検索意図に合致（ノウハウ系）
+
+各タイトルに選んだ理由も1行で説明すること。<button class="copy-btn" onclick="copyPrompt('SM-03',this)">コピー</button></div>
+      </div>
+    </div>
+
+    <!-- カテゴリ9: 人事・採用 -->
+    <div class="category">
+      <div class="cat-header">👥 カテゴリ9: 人事・採用（2本）</div>
+      <div class="prompt-item">
+        <div class="prompt-title">HR-01 求人票（ポジション別カスタマイズ）</div>
+        <div class="prompt-body" id="HR-01">あなたは採用のプロです。
+以下の情報で求人票を作成してください。
+
+【ポジション名】: {例: バックエンドエンジニア（Python）}
+【会社の特徴・カルチャー】: {例: スタートアップ・フルリモート・裁量大}
+【必須スキル】: {例: Python 3年以上・AWS経験}
+【歓迎スキル】: {例: Kubernetes・機械学習経験}
+【給与レンジ】: {例: 600〜900万円（経験による）}
+【求める人物像】: {例: 自走できる・ドキュメント好き}
+
+出力:
+1. キャッチコピー（1行）
+2. ポジション概要（100字以内）
+3. 業務内容（箇条書き5点）
+4. 求める人物像（箇条書き3〜5点）
+5. 会社の魅力（箇条書き3点）
+6. 選考フロー<button class="copy-btn" onclick="copyPrompt('HR-01',this)">コピー</button></div>
+      </div>
+      <div class="prompt-item">
+        <div class="prompt-title">HR-02 1on1面談アジェンダ生成</div>
+        <div class="prompt-body" id="HR-02">あなたは組織開発の専門家です。
+以下の状況に合わせた1on1アジェンダを作成してください。
+
+【メンバーの状況】: {例: 入社3ヶ月・技術力は高いがコミュニケーションが受け身}
+【最近の出来事・懸念事項】: {例: プロジェクトで少し詰まっている様子}
+【1on1の時間】: {例: 30分}
+【前回からの継続事項】: {例: スキルアップ計画の進捗確認}
+
+出力:
+1. アジェンダ（時間配分付き）
+2. 各アイテムで使える質問例（2〜3個ずつ）
+3. この1on1で「言わないほうがいいこと」の注意点
+4. 次回に持ち越す場合の記録テンプレート<button class="copy-btn" onclick="copyPrompt('HR-02',this)">コピー</button></div>
+      </div>
+    </div>
+
+    <!-- カテゴリ10: プロジェクト管理 -->
+    <div class="category-block" style="background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.06);margin-bottom:20px">
+      <div class="cat-header">📋 カテゴリ10: プロジェクト管理（2本）</div>
+      <div class="prompt-item">
+        <div class="prompt-title">PM-01 プロジェクト計画書ドラフト作成</div>
+        <div class="prompt-body" id="PM-01">あなたは経験豊富なプロジェクトマネージャーです。
+以下の情報を元に、プロジェクト計画書のドラフトを作成してください。
+
+【プロジェクト名】: {例: 社内DX推進プロジェクト}
+【目的・背景】: {例: 手動作業をAIで自動化し業務効率を30%向上}
+【期間】: {例: 2026年6月〜2026年12月（7ヶ月）}
+【メンバー】: {例: PM1名・エンジニア2名・デザイナー1名}
+【予算】: {例: 500万円}
+
+出力形式:
+1. プロジェクト概要（3行以内）
+2. マイルストーン（月別・最大6点）
+3. リスクと対策（上位3つ）
+4. 成功指標（KPI・3つ）
+5. ステークホルダーへの報告タイミング<button class="copy-btn" onclick="copyPrompt('PM-01',this)">コピー</button></div>
+      </div>
+      <div class="prompt-item">
+        <div class="prompt-title">PM-02 週次進捗レポート生成</div>
+        <div class="prompt-body" id="PM-02">あなたはプロジェクトマネージャーです。
+以下の情報を元に、週次進捗レポートを作成してください。
+
+【プロジェクト名】: {例: 新CRM導入プロジェクト}
+【今週の完了タスク】: {箇条書きで記入}
+【来週の予定タスク】: {箇条書きで記入}
+【課題・リスク】: {例: ベンダー対応が遅延中}
+【進捗率】: {例: 全体の45%完了}
+
+出力形式:
+1. 今週のサマリー（3行）
+2. 完了タスク一覧
+3. 来週の重点項目
+4. 課題・リスクと対応方針
+5. 全体進捗の信号（🟢青信号 / 🟡黄信号 / 🔴赤信号）と理由<button class="copy-btn" onclick="copyPrompt('PM-02',this)">コピー</button></div>
+      </div>
+    </div>
+
+    <!-- カテゴリ11: ライティング・PR -->
+    <div class="category-block" style="background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.06);margin-bottom:20px">
+      <div class="cat-header">✍️ カテゴリ11: ライティング・PR（2本）</div>
+      <div class="prompt-item">
+        <div class="prompt-title">WR-01 プレスリリースドラフト作成</div>
+        <div class="prompt-body" id="WR-01">あなたはPR・広報の専門家です。
+以下の情報で、メディア向けプレスリリースを作成してください。
+
+【発表内容】: {例: 新サービス「AI業務アシスタント」のリリース}
+【会社名】: {例: 株式会社CoreLoop}
+【発表日】: {例: 2026年6月1日}
+【ターゲットメディア】: {例: IT系メディア・経済誌}
+【訴求したい強み】: {例: 従来比70%の工数削減・無料トライアルあり}
+【担当者連絡先】: {例: 広報部 山田太郎 pr@example.com}
+
+出力形式（標準プレスリリース構成）:
+1. 見出し（キャッチーかつSEO意識）
+2. リード文（5W1Hで100字以内）
+3. 本文（概要→詳細→背景→展望）
+4. 会社概要
+5. 問い合わせ先<button class="copy-btn" onclick="copyPrompt('WR-01',this)">コピー</button></div>
+      </div>
+      <div class="prompt-item">
+        <div class="prompt-title">WR-02 ブログ記事アウトライン生成</div>
+        <div class="prompt-body" id="WR-02">あなたはコンテンツマーケティングの専門家です。
+以下の条件でブログ記事のアウトラインを作成してください。
+
+【記事テーマ】: {例: ChatGPTを使った営業メール自動化}
+【想定読者】: {例: 法人営業担当者・中小企業経営者}
+【文字数目標】: {例: 3,000文字}
+【記事の目的】: {例: LPへの誘導・問い合わせ獲得}
+【競合との差別化ポイント】: {例: 実際の使用例・コピペ用テンプレ付き}
+
+出力:
+1. SEOタイトル案（3パターン・32文字以内）
+2. 記事アウトライン（見出しH2・H3構成）
+3. 各セクションの要点（2〜3行ずつ）
+4. CTAの提案（記事末尾・途中）
+5. SNS投稿文案（X用140字・LinkedIn用）<button class="copy-btn" onclick="copyPrompt('WR-02',this)">コピー</button></div>
+      </div>
+    </div>
+
+    <!-- 案B誘導 -->
+    <div style="background:linear-gradient(135deg,#0d2818,#0a1f2e);border:1px solid #10b981;border-radius:14px;padding:28px;margin-bottom:24px;text-align:center">
+      <div style="font-size:24px;margin-bottom:8px">⚡</div>
+      <h2 style="font-size:20px;font-weight:800;color:#34d399;margin-bottom:8px">次のステップ: 手作業をゼロにしませんか？</h2>
+      <p style="font-size:14px;color:#94a3b8;margin-bottom:8px;max-width:520px;margin-left:auto;margin-right:auto">
+        このプロンプトパックと組み合わせると最強です。<br>
+        <strong style="color:#34d399">n8n/Make対応 AI自動化ワークフロー12本パック</strong>で、<br>
+        プロンプトで作った成果物を自動的に処理・配信・保存できます。
+      </p>
+      <div style="background:#0a1f14;border-radius:8px;padding:12px 20px;display:inline-block;margin-bottom:16px;text-align:left">
+        <p style="font-size:13px;color:#6b7280;margin:0 0 4px 0">✅ メール自動返信 → Slackに通知</p>
+        <p style="font-size:13px;color:#6b7280;margin:0 0 4px 0">✅ スプレッドシートのデータ → AI分析 → レポート自動生成</p>
+        <p style="font-size:13px;color:#6b7280;margin:0">✅ フォーム送信 → CRM登録 → ウェルカムメール自動送信</p>
+      </div>
+      <div style="margin-bottom:8px">
+        <span style="text-decoration:line-through;color:#6b7280;font-size:14px">通常 ¥2,980</span>
+        <span style="color:#fbbf24;font-size:22px;font-weight:800;margin-left:10px">¥1,980</span>
+        <span style="background:#dc2626;color:white;font-size:11px;padding:2px 8px;border-radius:4px;margin-left:8px">購入者限定 ¥1,000 OFF</span>
+      </div>
+      <p style="font-size:12px;color:#6b7280;margin-bottom:16px">※ このページをご覧の方（プロンプトパック購入者）限定の特別価格です</p>
+      <a href="https://buy.stripe.com/8x26oHfOb6cegZeddW4ko09" target="_blank"
+         style="display:inline-block;background:#10b981;color:white;font-weight:800;font-size:16px;padding:14px 36px;border-radius:8px;text-decoration:none;letter-spacing:0.5px">
+        🚀 ¥1,980 でワークフローパックを入手する
+      </a>
+      <p style="font-size:11px;color:#4b5563;margin-top:10px">Stripeで安全決済 · 購入後即ダウンロード</p>
+    </div>
+
+    <div class="footer">© 2026 CoreLoop Works — ご購入ありがとうございました</div>
+  </div>
+
+  <script>
+    function copyPrompt(id, btn) {
+      const el = document.getElementById(id);
+      const btn2 = el.querySelector('.copy-btn');
+      // ボタンテキストを除いたテキストを取得
+      const clone = el.cloneNode(true);
+      clone.querySelector('.copy-btn').remove();
+      const text = clone.innerText || clone.textContent;
+      navigator.clipboard.writeText(text.trim()).then(() => {
+        btn.textContent = '✓ コピー済';
+        btn.classList.add('copied');
+        setTimeout(() => { btn.textContent = 'コピー'; btn.classList.remove('copied'); }, 2000);
+      });
+    }
+
+    function downloadAll() {
+      const prompts = [];
+      document.querySelectorAll('.prompt-item').forEach(item => {
+        const title = item.querySelector('.prompt-title').textContent;
+        const bodyEl = item.querySelector('.prompt-body').cloneNode(true);
+        bodyEl.querySelector('.copy-btn').remove();
+        const body = (bodyEl.innerText || bodyEl.textContent).trim();
+        prompts.push('## ' + title + '\n\n' + body);
+      });
+      const content = '# AIエージェント実務プロンプトパック vol.1\n\n' + prompts.join('\n\n---\n\n');
+      const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'prompt-pack-v1.txt';
+      a.click();
+    }
+  </script>
+</body>
+</html>

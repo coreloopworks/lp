@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AIエージェント実務プロンプトパック vol.1 | 業務で即使える40本（11カテゴリ収録）</title>
+  <meta name="description" content="ChatGPT・Claude・Geminiで即使える業務プロンプト40本（11カテゴリ収録）。競合調査・議事録・メール・企画・コード補助・SNS・人事対応をコピペだけで高速化。¥1,980で購入即ダウンロード。">
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Noto Sans JP",sans-serif;background:#0f0f13;color:#e2e8f0;line-height:1.7}
+    a{color:inherit;text-decoration:none}
+
+    /* Hero */
+    .hero{background:linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%);padding:72px 24px 80px;text-align:center;position:relative;overflow:hidden}
+    .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 60% 20%,rgba(99,102,241,.15),transparent 60%)}
+    .badge{display:inline-block;background:rgba(99,102,241,.2);border:1px solid rgba(99,102,241,.4);color:#a5b4fc;font-size:12px;font-weight:700;padding:4px 14px;border-radius:99px;margin-bottom:20px;letter-spacing:.05em}
+    .hero h1{font-size:clamp(26px,5vw,46px);font-weight:900;line-height:1.25;margin-bottom:16px;color:#fff}
+    .hero h1 em{font-style:normal;color:#818cf8}
+    .hero-sub{font-size:clamp(15px,2vw,18px);color:#94a3b8;max-width:560px;margin:0 auto 32px}
+    .hero-proof{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;margin-bottom:36px}
+    .proof-item{font-size:13px;color:#64748b;display:flex;align-items:center;gap:6px}
+    .proof-item::before{content:'✓';color:#6366f1;font-weight:700}
+    .cta-btn{display:inline-block;background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;font-size:18px;font-weight:800;padding:18px 48px;border-radius:14px;text-decoration:none;transition:all .2s;box-shadow:0 8px 32px rgba(99,102,241,.4);position:relative}
+    .cta-btn:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(99,102,241,.5)}
+    .cta-price{margin-top:12px;font-size:13px;color:#64748b}
+    .cta-price strong{color:#e2e8f0}
+
+    /* Problem */
+    .section{padding:72px 24px;max-width:840px;margin:0 auto}
+    .section-label{font-size:11px;font-weight:700;color:#6366f1;letter-spacing:.15em;text-transform:uppercase;margin-bottom:12px}
+    .section h2{font-size:clamp(22px,3.5vw,32px);font-weight:800;margin-bottom:24px;color:#f1f5f9}
+    .problem-list{list-style:none;display:grid;gap:12px}
+    .problem-list li{background:#1e1e2e;border:1px solid #2a2a3e;border-radius:12px;padding:16px 20px;display:flex;align-items:center;gap:12px;font-size:15px;color:#94a3b8}
+    .problem-list li::before{content:'😩';font-size:20px;flex-shrink:0}
+
+    /* Solution */
+    .solution-bg{background:#13131f;padding:72px 24px}
+    .solution-inner{max-width:840px;margin:0 auto}
+    .before-after{display:grid;grid-template-columns:1fr auto 1fr;gap:16px;align-items:center;margin:32px 0}
+    .ba-card{background:#1e1e2e;border-radius:12px;padding:20px;font-size:14px;line-height:1.6}
+    .ba-card.before{border:1px solid #ef4444;opacity:.7}
+    .ba-card.after{border:1px solid #22c55e}
+    .ba-label{font-size:11px;font-weight:700;letter-spacing:.1em;margin-bottom:8px}
+    .ba-card.before .ba-label{color:#ef4444}
+    .ba-card.after .ba-label{color:#22c55e}
+    .arrow{font-size:28px;color:#6366f1;text-align:center}
+
+    /* Contents */
+    .contents-bg{padding:72px 24px}
+    .contents-inner{max-width:840px;margin:0 auto}
+    .cat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:32px}
+    .cat-card{background:#1e1e2e;border:1px solid #2a2a3e;border-radius:14px;padding:24px}
+    .cat-icon{font-size:28px;margin-bottom:12px}
+    .cat-card h3{font-size:15px;font-weight:700;color:#e2e8f0;margin-bottom:8px}
+    .cat-card p{font-size:13px;color:#64748b;line-height:1.6}
+    .cat-count{display:inline-block;background:rgba(99,102,241,.15);color:#818cf8;font-size:11px;font-weight:700;padding:2px 10px;border-radius:99px;margin-top:10px}
+
+    /* Samples */
+    .sample-bg{background:#13131f;padding:72px 24px}
+    .sample-inner{max-width:840px;margin:0 auto}
+    .sample-card{background:#1e1e2e;border:1px solid #2a2a3e;border-radius:12px;padding:20px;margin-top:20px}
+    .sample-id{font-size:11px;font-weight:700;color:#6366f1;letter-spacing:.1em;margin-bottom:8px}
+    .sample-title{font-size:16px;font-weight:700;color:#e2e8f0;margin-bottom:12px}
+    .sample-code{background:#0f0f18;border:1px solid #2a2a3e;border-radius:8px;padding:16px;font-family:"Courier New",monospace;font-size:12px;color:#a5b4fc;line-height:1.75;white-space:pre-wrap;overflow-x:auto}
+    .sample-note{font-size:12px;color:#64748b;margin-top:10px}
+
+    /* Testimonial / proof */
+    .proof-bg{padding:72px 24px}
+    .proof-inner{max-width:840px;margin:0 auto}
+    .proof-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:32px}
+    .proof-card{background:#1e1e2e;border:1px solid #2a2a3e;border-radius:14px;padding:24px}
+    .proof-stars{color:#f59e0b;font-size:16px;margin-bottom:10px}
+    .proof-text{font-size:14px;color:#94a3b8;line-height:1.7;margin-bottom:12px}
+    .proof-author{font-size:12px;color:#64748b}
+
+    /* CTA bottom */
+    .cta-bg{background:linear-gradient(135deg,#1a1a2e,#0f3460);padding:80px 24px;text-align:center}
+    .cta-inner{max-width:560px;margin:0 auto}
+    .cta-inner h2{font-size:clamp(22px,3.5vw,32px);font-weight:800;color:#fff;margin-bottom:16px}
+    .price-box{background:rgba(99,102,241,.1);border:1px solid rgba(99,102,241,.3);border-radius:16px;padding:28px;margin:28px 0}
+    .price-original{font-size:14px;color:#64748b;text-decoration:line-through;margin-bottom:4px}
+    .price-main{font-size:48px;font-weight:900;color:#818cf8;line-height:1}
+    .price-tax{font-size:14px;color:#64748b;margin-top:4px}
+    .price-features{display:flex;flex-direction:column;gap:8px;margin-top:20px;text-align:left}
+    .price-features li{list-style:none;font-size:14px;color:#94a3b8;display:flex;align-items:center;gap:8px}
+    .price-features li::before{content:'✓';color:#6366f1;font-weight:700}
+
+    /* FAQ */
+    .faq-bg{background:#13131f;padding:72px 24px}
+    .faq-inner{max-width:720px;margin:0 auto}
+    .faq-item{border-bottom:1px solid #2a2a3e;padding:20px 0}
+    .faq-q{font-size:15px;font-weight:700;color:#e2e8f0;margin-bottom:10px;display:flex;gap:12px}
+    .faq-q::before{content:'Q';color:#6366f1;font-weight:900;flex-shrink:0}
+    .faq-a{font-size:14px;color:#94a3b8;padding-left:26px;line-height:1.75}
+
+    /* Footer */
+    footer{background:#0a0a10;padding:32px 24px;text-align:center;font-size:12px;color:#475569}
+    footer a{color:#6366f1}
+  </style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="badge">🔥 先着50名限定特典 — 残り47名</div>
+  <h1>AIが<em>やっと</em>使える人になる。<br>業務プロンプト<em>40本</em>セット</h1>
+  <p class="hero-sub">「何を入力すれば？」と悩む時間、終わりにしませんか。<br>ChatGPT・Claude・Gemini対応。コピペして変数を変えるだけ。</p>
+  <div class="hero-proof">
+    <span class="proof-item">購入即ダウンロード</span>
+    <span class="proof-item">全40本収録（11カテゴリ）</span>
+    <span class="proof-item">対応モデル4種</span>
+    <span class="proof-item">買い切り</span>
+    <span class="proof-item">Qiita 700+ views 獲得</span>
+    <span class="proof-item">Qiita 5本記事公開済み</span>
+  </div>
+  <p style="color:#fbbf24;font-size:14px;font-weight:600;margin-bottom:12px">✨ SNS・HR・生産性・営業支援プロンプトも全部包含！全40本が同一価格で</p>
+  <a class="cta-btn" href="https://buy.stripe.com/6oU7sL31pdEG4cs0ra4ko08" target="_blank">今すぐ購入・即ダウンロード →</a>
+  <p class="cta-price">¥1,980（税込）<strong>　買い切り・永続利用可</strong></p>
+  <p style="margin-top:8px;font-size:12px;color:#f59e0b">🎁 先着50名特典: AI自動化ワークフローパック（¥2,980相当）優先案内 + ¥980セット割引権</p>
+</section>
+
+<!-- UPSELL BANNER -->
+<div style="background:linear-gradient(135deg,#0a2a1e,#0a0f1e);border-top:1px solid rgba(16,185,129,.2);border-bottom:1px solid rgba(16,185,129,.2);padding:16px 24px;text-align:center">
+  <p style="font-size:13px;color:#94a3b8">🤖 さらに上を目指すなら → <a href="https://ai-workflow-pack-v1.netlify.app" style="color:#34d399;font-weight:700;text-decoration:underline" target="_blank">AI自動化ワークフローパック（¥2,980）</a> | n8n/Makeで実際に動く12フロー | <span style="color:#fbbf24">セット購入で¥980引き</span></p>
+</div>
+
+
+<!-- PROBLEM -->
+<div class="section">
+  <p class="section-label">Problem</p>
+  <h2>こんな悩み、ありませんか？</h2>
+  <ul class="problem-list">
+    <li>AIに入力する言葉が思い浮かばず、毎回ゼロから考えている</li>
+    <li>ChatGPTの回答がズレていて、何度も修正している</li>
+    <li>同僚はAIを使いこなしているのに、自分だけ使えている気がしない</li>
+    <li>プロンプトを調べても英語ばかりで、業務に使えるものがない</li>
+    <li>AIで作業時間を短縮したいが、何から始めればいいかわからない</li>
+  </ul>
+</div>
+
+<!-- SOLUTION -->
+<div class="solution-bg">
+  <div class="solution-inner">
+    <p class="section-label">Solution</p>
+    <h2>プロンプトが「型」になれば、<br>AIは道具に変わる</h2>
+    <p style="color:#94a3b8;max-width:560px;margin-bottom:8px">このパックは、現場の業務で磨いた「穴埋め式プロンプト」を40本（11カテゴリ収録）。変数を書き換えるだけで、誰でも即使えます。</p>
+
+    <div class="before-after">
+      <div class="ba-card before">
+        <div class="ba-label">BEFORE</div>
+        「競合を調べて」と入力<br>→ 的外れな回答<br>→ 何度も質問し直し<br>→ 結局自分でまとめる
+      </div>
+      <div class="arrow">→</div>
+      <div class="ba-card after">
+        <div class="ba-label">AFTER</div>
+        R-01テンプレートに<br>サービス名を入力<br>→ 表形式で競合5社<br>→ 5分で完了
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTENTS -->
+<div class="contents-bg">
+  <div class="contents-inner">
+    <p class="section-label">Contents</p>
+    <h2>11カテゴリ、全40本収録</h2>
+    <div class="cat-grid">
+      <div class="cat-card">
+        <div class="cat-icon">📊</div>
+        <h3>調査・リサーチ</h3>
+        <p>競合調査、市場規模、情報抽出、顧客インタビュー設計</p>
+        <span class="cat-count">4本</span>
+      </div>
+      <div class="cat-card">
+        <div class="cat-icon">📝</div>
+        <h3>要約・整理</h3>
+        <p>会議メモ整理、長文要約、複数案比較、資料ポイント整理</p>
+        <span class="cat-count">4本</span>
+      </div>
+      <div class="cat-card">
+        <div class="cat-icon">✉️</div>
+        <h3>メール・文章作成</h3>
+        <p>依頼・お断り・提案書・SNS投稿・FAQ作成</p>
+        <span class="cat-count">5本</span>
+      </div>
+      <div class="cat-card">
+        <div class="cat-icon">💡</div>
+        <h3>企画・アイデア</h3>
+        <p>新規事業アイデア、コンテンツ企画、ブレスト、KPI設定</p>
+        <span class="cat-count">4本</span>
+      </div>
+      <div class="cat-card">
+        <div class="cat-icon">💻</div>
+        <h3>コード補助</h3>
+        <p>コードレビュー、自動化スクリプト、API連携設計</p>
+        <span class="cat-count">3本</span>
+      </div>
+      <div class="cat-card">
+        <div class="cat-icon">🎁</div>
+        <h3>営業・起業支援</h3>
+        <p>週次振り返り、SNS一括投稿、プレスリリース、差別化ストーリー、求人票</p>
+        <span class="cat-count">5本</span>
+      </div>
+      <div class="cat-card">
+        <div class="cat-icon">⏱️</div>
+        <h3>生産性・時間管理</h3>
+        <p>週次振り返りレポート、1on1準備、進捗報告メール</p>
+        <span class="cat-count">3本</span>
+      </div>
+      <div class="cat-card">
+        <div class="cat-icon">🤝</div>
+        <h3>営業・顧客対応</h3>
+        <p>新規提案メール、料金改定告知、クレーム対応メール</p>
+        <span class="cat-count">3本</span>
+      </div>
+      <div class="cat-card">
+        <div class="cat-icon">📱</div>
+        <h3>SNS・マーケティング</h3>
+        <p>LinkedIn投稿、Xスレッド、SEOタイトル展開</p>
+        <span class="cat-count">3本</span>
+      </div>
+      <div class="cat-card">
+        <div class="cat-icon">👥</div>
+        <h3>人事・採用</h3>
+        <p>求人票作成、1on1面談アジェンダ生成</p>
+        <span class="cat-count">2本</span>
+      </div>
+      <div class="cat-card">
+        <div class="cat-icon">📋</div>
+        <h3>プロジェクト管理</h3>
+        <p>計画書ドラフト、週次進捗レポート生成</p>
+        <span class="cat-count">2本</span>
+      </div>
+      <div class="cat-card">
+        <div class="cat-icon">✍️</div>
+        <h3>ライティング・PR</h3>
+        <p>プレスリリース作成、ブログ記事アウトライン</p>
+        <span class="cat-count">2本</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SAMPLES -->
+<div class="sample-bg">
+  <div class="sample-inner">
+    <p class="section-label">Free Sample</p>
+    <h2>無料サンプル（3本）</h2>
+    <p style="color:#64748b;margin-bottom:4px">購入前にお試しください。残り37本はパックに収録。</p>
+
+    <div class="sample-card">
+      <div class="sample-id">R-01</div>
+      <div class="sample-title">競合サービス調査</div>
+      <div class="sample-code">あなたは優秀なリサーチャーです。
+以下の条件でサービスの競合調査を行い、表形式でまとめてください。
+
+【調査対象サービス/市場】: {サービス名または市場}
+【調査項目】: サービス名、価格帯、主な機能、ターゲット、強み、弱み
+【調査件数】: 上位5〜8件
+
+最後に「競合の共通課題」と「差別化できそうな点」を3つずつ挙げてください。</div>
+      <div class="sample-note">✏️ {} の中を書き換えるだけで動きます</div>
+    </div>
+
+    <div class="sample-card">
+      <div class="sample-id">S-01</div>
+      <div class="sample-title">会議・打ち合わせメモの整理</div>
+      <div class="sample-code">以下の会議メモを整理してください。
+
+【メモ】:
+{会議メモをここに貼り付け}
+
+出力形式:
+## 決定事項
+## 課題・懸念点
+## 次のアクション（担当者・期日付き）
+## 共有すべき情報
+
+箇条書きで簡潔にまとめ、冗長な表現は省いてください。</div>
+    </div>
+
+    <div class="sample-card">
+      <div class="sample-id">E-01</div>
+      <div class="sample-title">ビジネスメール作成（依頼）</div>
+      <div class="sample-code">以下の条件でビジネスメールを作成してください。
+
+【送信者】: {自分の役職・名前}
+【宛先】: {相手の役職・関係性}
+【目的】: {例: ○○の打ち合わせをお願いしたい}
+【伝えたい要点】: {箇条書きで}
+【トーン】: {例: 丁寧、フランク、フォーマル}
+
+件名・本文・締め・署名のセットで出力してください。</div>
+    </div>
+  </div>
+</div>
+
+<!-- MID-PAGE CTA -->
+<div style="background:#1a1a2e;padding:48px 24px;text-align:center;border-top:1px solid #2a2a3e;border-bottom:1px solid #2a2a3e">
+  <p style="font-size:14px;color:#64748b;margin-bottom:8px">↓ 上記は全40本のサンプル3本です</p>
+  <p style="font-size:18px;font-weight:800;color:#f1f5f9;margin-bottom:20px">残り37本を今すぐ手に入れる</p>
+  <a href="https://buy.stripe.com/6oU7sL31pdEG4cs0ra4ko08" target="_blank" style="display:inline-block;background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;font-size:16px;font-weight:800;padding:16px 40px;border-radius:12px;text-decoration:none;box-shadow:0 8px 24px rgba(99,102,241,.4)">¥1,980 で購入・即ダウンロード →</a>
+  <p style="font-size:12px;color:#64748b;margin-top:12px">🔒 Stripe決済 | 買い切り永続利用可</p>
+</div>
+
+<!-- WHY WE BUILT THIS -->
+<div class="proof-bg">
+  <div class="proof-inner">
+    <p class="section-label">Background</p>
+    <h2>なぜ、このパックを作ったか</h2>
+    <div style="max-width:680px;margin:0 auto">
+      <div class="proof-card" style="margin-bottom:20px">
+        <div style="font-size:24px;margin-bottom:12px">💡</div>
+        <div class="proof-text">ChatGPT・Claude・Geminiを日々の業務で使い続ける中で、<strong style="color:#e2e8f0">「プロンプトの書き方」で結果が天と地ほど変わる</strong>ことを体感しました。<br><br>ロールを明示する、出力形式を指定する、制約条件を先に渡す——こうした原則を徹底するだけで、同じAIが劇的に「使える道具」に変わります。<br><br>このパックは、200本以上のプロンプトを検証・取捨選択した末に残した「本当に使えるもの」だけを厳選して40本（11カテゴリ）にまとめたものです。</div>
+        <div style="font-size:13px;color:#6366f1;font-weight:700;margin-top:12px">— CoreLoopWorks / AI自動化研究チーム</div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px">
+        <div style="background:#1e1e2e;border:1px solid #2a2a3e;border-radius:12px;padding:16px;text-align:center">
+          <div style="font-size:32px;font-weight:900;color:#818cf8">200+</div>
+          <div style="font-size:12px;color:#64748b;margin-top:4px">検証プロンプト数</div>
+        </div>
+        <div style="background:#1e1e2e;border:1px solid #2a2a3e;border-radius:12px;padding:16px;text-align:center">
+          <div style="font-size:32px;font-weight:900;color:#818cf8">40本</div>
+          <div style="font-size:12px;color:#64748b;margin-top:4px">厳選収録（ボーナス含む）</div>
+        </div>
+        <div style="background:#1e1e2e;border:1px solid #2a2a3e;border-radius:12px;padding:16px;text-align:center">
+          <div style="font-size:32px;font-weight:900;color:#818cf8">4種</div>
+          <div style="font-size:12px;color:#64748b;margin-top:4px">対応AIモデル</div>
+        </div>
+        <div style="background:#1e1e2e;border:1px solid #2a2a3e;border-radius:12px;padding:16px;text-align:center">
+          <div style="font-size:32px;font-weight:900;color:#818cf8">¥0</div>
+          <div style="font-size:12px;color:#64748b;margin-top:4px">追加費用・月額なし</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta-bg">
+  <div class="cta-inner">
+    <h2>今日から、AIを道具として使いこなす</h2>
+    <div class="price-box">
+      <div class="price-original">通常価格 ¥2,980</div>
+      <div class="price-main">¥1,980</div>
+      <div class="price-tax">税込・買い切り</div>
+      <ul class="price-features">
+        <li>全40本のプロンプト（11カテゴリ収録）</li>
+        <li>🎁 SNS・HR・生産性・営業支援全部含む（追加料金なし）</li>
+        <li>ChatGPT / Claude / Gemini / OpenClaw 対応</li>
+        <li>購入即ダウンロード・ブラウザで即使用可</li>
+        <li>永続利用・追加料金なし</li>
+        <li>コピーボタン・全文テキスト保存機能付き</li>
+      </ul>
+    </div>
+    <a class="cta-btn" href="https://buy.stripe.com/6oU7sL31pdEG4cs0ra4ko08" target="_blank">¥1,980 で購入・即ダウンロード →</a>
+    <p class="cta-price" style="margin-top:16px;font-size:12px">🔒 Stripe安全決済 ｜ 7日間サポート保証 ｜ 購入即ダウンロード</p>
+  </div>
+</div>
+
+<!-- FAQ -->
+<div class="faq-bg">
+  <div class="faq-inner">
+    <p class="section-label">FAQ</p>
+    <h2>よくある質問</h2>
+    <div class="faq-item">
+      <div class="faq-q">購入後、どうやって受け取りますか？</div>
+      <div class="faq-a">決済完了後、自動的にダウンロードページにリダイレクトされます。ページ上で全プロンプトをすぐに確認・コピーできます。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">どのAIツールで使えますか？</div>
+      <div class="faq-a">ChatGPT（GPT-4o）、Claude（3.5以上）、Gemini、OpenClawで動作確認済みです。テキストを貼り付けられるAIであれば基本的に使用できます。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">プログラミング知識は必要ですか？</div>
+      <div class="faq-a">不要です。テキストをコピーして {} の中を書き換えるだけです。スマートフォンからでも使用できます。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">返金はできますか？</div>
+      <div class="faq-a">購入後7日以内に「内容に問題がある」場合は、koichi.shirai@coreloopworks.com までご連絡ください。誠実に対応します。事前に無料サンプル3本で品質をご確認いただくことをお勧めします。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">一度買えばずっと使えますか？</div>
+      <div class="faq-a">はい。買い切りです。追加料金や月額費用は一切ありません。将来的に内容を更新した場合も、購入者には無償で提供する予定です。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">追加プロンプトは含まれますか？</div>
+      <div class="faq-a">はい。営業・起業支援（5本）、生産性・時間管理（3本）、SNS・マーケティング（3本）、人事・採用（2本）、プロジェクト管理（2本）、ライティング・PR（2本）など、実際の業務フローをそのまま使えるプロンプトが全部含まれています。追加料金なし。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">AI自動化ワークフローパックとの違いは？</div>
+      <div class="faq-a">このパック（¥1,980）はChatGPT等への「プロンプト入力文」が中心です。ワークフローパック（¥2,980）はn8n/Makeで実際に動く「自動化フロー」12本のセットです。<a href="https://ai-workflow-pack-v1.netlify.app" style="color:#818cf8" target="_blank">→ ワークフローパックを見る</a><br>両方を組み合わせると、AIの指示から実行まで一貫して自動化できます。セット購入で¥980割引予定。</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- 運営者情報 -->
+<div style="background:#111827;padding:48px 24px;border-top:1px solid #1e1e2e">
+  <div style="max-width:720px;margin:0 auto;text-align:center">
+    <p style="font-size:11px;font-weight:700;color:#6366f1;letter-spacing:.15em;text-transform:uppercase;margin-bottom:16px">About</p>
+    <h2 style="font-size:20px;font-weight:800;color:#f1f5f9;margin-bottom:12px">CoreLoopWorks（コアループワークス）について</h2>
+    <p style="font-size:14px;color:#94a3b8;line-height:1.8;max-width:560px;margin:0 auto 16px">
+      AIツール活用・業務自動化を研究・発信するチームです。<br>
+      ChatGPT・Claude・Geminiを日々の業務で徹底的に検証し、<br>
+      「本当に使えるプロンプト」だけを厳選して提供しています。
+    </p>
+    <div style="display:flex;justify-content:center;gap:20px;flex-wrap:wrap;margin-top:16px">
+      <span style="font-size:13px;color:#64748b">📝 Qiita: <a href="https://qiita.com/coreloopworks" style="color:#818cf8" target="_blank">@coreloopworks</a></span>
+      <span style="font-size:13px;color:#64748b">🐦 X: <a href="https://x.com/coreloopworks" style="color:#818cf8" target="_blank">@coreloopworks</a></span>
+      <span style="font-size:13px;color:#64748b">📧 support@coreloopworks.com</span>
+      <span style="font-size:13px;color:#64748b">🔒 Stripe安全決済</span>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 CoreLoop Works　|　<a href="mailto:support@coreloopworks.com">support@coreloopworks.com</a>　|　<a href="https://ai-workflow-pack-v1.netlify.app">ワークフローパック</a>　|　<a href="https://qiita.com/coreloopworks">Qiita</a>　|　<a href="https://x.com/coreloopworks">X/Twitter</a></p>
+  <p style="margin-top:8px"><a href="/thanks.html">購入済みの方はこちら</a></p>
+</footer>
+
+</body>
+</html>

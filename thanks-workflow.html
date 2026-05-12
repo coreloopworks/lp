@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>購入ありがとうございます | AI自動化ワークフローパック vol.1</title>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Noto Sans JP",sans-serif;background:#0a0f1e;color:#e2e8f0;line-height:1.7;padding:24px}
+    .hero{background:linear-gradient(135deg,#0a2a1e,#0a0f1e);border:1px solid rgba(16,185,129,.3);border-radius:20px;padding:48px 32px;text-align:center;max-width:800px;margin:0 auto 32px}
+    .hero h1{font-size:28px;font-weight:800;color:#34d399;margin-bottom:12px}
+    .hero p{font-size:16px;color:#94a3b8;line-height:1.7}
+    .dl-btn{display:inline-block;background:linear-gradient(135deg,#10b981,#059669);color:#fff;font-size:18px;font-weight:800;padding:18px 48px;border-radius:14px;text-decoration:none;margin-top:24px;box-shadow:0 8px 32px rgba(16,185,129,.4)}
+    .dl-btn:hover{opacity:.9}
+    .container{max-width:800px;margin:0 auto}
+    .section{background:#111827;border:1px solid #1f2937;border-radius:16px;padding:28px;margin-bottom:24px}
+    .section h2{font-size:18px;font-weight:700;color:#34d399;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+    .wf-grid{display:grid;gap:10px}
+    .wf-item{background:#0d1117;border:1px solid #1f2937;border-radius:10px;padding:14px 18px;display:flex;align-items:flex-start;gap:12px}
+    .wf-id{font-size:11px;font-weight:700;color:#10b981;min-width:38px;margin-top:2px;flex-shrink:0}
+    .wf-info{}
+    .wf-title{font-size:14px;font-weight:700;color:#e2e8f0}
+    .wf-desc{font-size:12px;color:#64748b;margin-top:4px}
+    .step-list{list-style:none;display:grid;gap:12px}
+    .step-item{display:flex;gap:14px;align-items:flex-start}
+    .step-num{background:rgba(16,185,129,.2);color:#34d399;font-size:12px;font-weight:700;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+    .step-text{font-size:14px;color:#94a3b8;line-height:1.6}
+    .step-text strong{color:#e2e8f0}
+    .notice{background:#0d1117;border:1px solid #22c55e;border-radius:10px;padding:14px 18px;font-size:13px;color:#86efac;margin-bottom:24px}
+    .support{text-align:center;padding:24px;font-size:13px;color:#64748b}
+    .support a{color:#10b981}
+  </style>
+</head>
+<body>
+
+<div class="hero">
+  <div style="font-size:56px;margin-bottom:16px">🎉</div>
+  <h1>ご購入ありがとうございます！</h1>
+  <p>AI自動化ワークフローパック vol.1（12本 + セットアップガイド）を<br>下のボタンからダウンロードしてください。</p>
+  <a class="dl-btn" href="/workflow-pack-v1.zip" download="ai-workflow-pack-v1.zip">📥 ワークフローパック一括ダウンロード（ZIP）</a>
+  <p style="margin-top:12px;font-size:12px;color:#64748b">ワークフロー12本 + 日本語セットアップガイド（Markdown）を含みます</p>
+</div>
+
+<div class="container">
+
+  <div class="notice">
+    ⚠️ このページのURLは購入者専用です。第三者への共有・再配布はご遠慮ください。<br>
+    サポート: <strong>support@coreloopworks.com</strong>（通常24時間以内に返信）
+  </div>
+
+  <div class="section">
+    <h2>🚀 クイックスタート（3ステップ）</h2>
+    <ul class="step-list">
+      <li class="step-item">
+        <div class="step-num">1</div>
+        <div class="step-text"><strong>n8nまたはMakeにアクセス</strong><br>
+        n8n: <a href="https://n8n.io" target="_blank" style="color:#10b981">n8n.io</a>（クラウド版: 14日間無料）<br>
+        Make: <a href="https://make.com" target="_blank" style="color:#10b981">make.com</a>（無料プランあり）</div>
+      </li>
+      <li class="step-item">
+        <div class="step-num">2</div>
+        <div class="step-text"><strong>JSONファイルをインポート</strong><br>
+        n8n: 左メニュー「Workflows」→「Import from JSON」→ ファイル選択<br>
+        詳細は同梱の <code>setup-guide.md</code> を参照</div>
+      </li>
+      <li class="step-item">
+        <div class="step-num">3</div>
+        <div class="step-text"><strong>APIキーを設定して稼働</strong><br>
+        各ワークフローに必要な外部サービス（Gmail/Slack等）のAPIキーを設定すれば完成です。<br>
+        ガイドに詳細な手順を記載しています。</div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>📦 収録ワークフロー 全12本</h2>
+    <div class="wf-grid">
+      <div class="wf-item">
+        <div class="wf-id">W-01</div>
+        <div class="wf-info">
+          <div class="wf-title">RSS記事→AI要約→Slack通知</div>
+          <div class="wf-desc">競合・業界ニュースを自動で監視、AI要約してSlackに届ける</div>
+        </div>
+      </div>
+      <div class="wf-item">
+        <div class="wf-id">W-02</div>
+        <div class="wf-info">
+          <div class="wf-title">Gmail AI分類→スプレッドシート記録</div>
+          <div class="wf-desc">受信メールをAIが自動分類してGoogleスプレッドシートに記録</div>
+        </div>
+      </div>
+      <div class="wf-item">
+        <div class="wf-id">W-03</div>
+        <div class="wf-info">
+          <div class="wf-title">Webページ変更検知→通知</div>
+          <div class="wf-desc">競合サイト・官公庁ページの変更を自動検知してメール通知</div>
+        </div>
+      </div>
+      <div class="wf-item">
+        <div class="wf-id">W-04</div>
+        <div class="wf-info">
+          <div class="wf-title">価格モニタリング→スプレッドシート</div>
+          <div class="wf-desc">ECサイトの価格を定期取得してスプレッドシートにグラフ化</div>
+        </div>
+      </div>
+      <div class="wf-item">
+        <div class="wf-id">W-05</div>
+        <div class="wf-info">
+          <div class="wf-title">キーワード→AIでNotion記事生成</div>
+          <div class="wf-desc">キーワードリストからAIが記事を自動生成しNotionに保存</div>
+        </div>
+      </div>
+      <div class="wf-item">
+        <div class="wf-id">W-06</div>
+        <div class="wf-info">
+          <div class="wf-title">スプレッドシート→SNS投稿文生成</div>
+          <div class="wf-desc">記事URLを貼るだけでX/LinkedIn/Instagramの投稿文を5本生成</div>
+        </div>
+      </div>
+      <div class="wf-item">
+        <div class="wf-id">W-07</div>
+        <div class="wf-info">
+          <div class="wf-title">会議メモ→AI議事録→メール送信</div>
+          <div class="wf-desc">会議メモをAIが整形し、参加者リストに自動メール</div>
+        </div>
+      </div>
+      <div class="wf-item">
+        <div class="wf-id">W-08</div>
+        <div class="wf-info">
+          <div class="wf-title">商品情報→AIでLPコピー生成</div>
+          <div class="wf-desc">商品名・特徴を入力するだけでセールスコピーを自動生成</div>
+        </div>
+      </div>
+      <div class="wf-item">
+        <div class="wf-id">W-09</div>
+        <div class="wf-info">
+          <div class="wf-title">フォーム送信→Gmailドラフト作成</div>
+          <div class="wf-desc">問い合わせフォームの回答をAIが分析して返信ドラフトを生成</div>
+        </div>
+      </div>
+      <div class="wf-item">
+        <div class="wf-id">W-10</div>
+        <div class="wf-info">
+          <div class="wf-title">Stripe購入→サンクスメール自動送信</div>
+          <div class="wf-desc">購入完了をトリガーにパーソナライズされたサンクスメールを自動送信</div>
+        </div>
+      </div>
+      <div class="wf-item">
+        <div class="wf-id">W-11</div>
+        <div class="wf-info">
+          <div class="wf-title">購入者フォローアップシーケンス</div>
+          <div class="wf-desc">購入3日後・7日後・30日後に自動でフォローメールを送信</div>
+        </div>
+      </div>
+      <div class="wf-item">
+        <div class="wf-id">W-12</div>
+        <div class="wf-info">
+          <div class="wf-title">Discord→AI自動返信Bot</div>
+          <div class="wf-desc">Discordサーバーの質問をAIが分析して自動返信（FAQ Bot）</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>🎁 ボーナス: プロンプトパックとのセット活用法</h2>
+    <p style="color:#94a3b8;font-size:14px;line-height:1.8">
+      ワークフロー内の「AIノード」に、<a href="https://clever-florentine-bc4dc9.netlify.app" style="color:#10b981">プロンプトパック（案A）</a>のプロンプトをそのまま組み込めます。<br>
+      例: W-07（議事録ワークフロー）+ S-01（要約プロンプト）= 「会議メモを貼るだけ→完成した議事録が担当者に届く」自動化が完成。<br><br>
+      <strong style="color:#e2e8f0">案Aプロンプトパック（¥1,980）はこちら →</strong> 
+      <a href="https://buy.stripe.com/6oU7sL31pdEG4cs0ra4ko08" style="color:#6366f1;font-weight:700" target="_blank">セット購入で¥980引き適用済み</a>
+    </p>
+  </div>
+
+</div>
+
+<div class="support">
+  ご質問・お困りの際は <a href="mailto:support@coreloopworks.com">support@coreloopworks.com</a> へお気軽にご連絡ください。<br>
+  <a href="https://zenn.dev/coreloopworks" style="color:#94a3b8">Zenn</a> | 
+  <a href="https://ai-workflow-pack-v1.netlify.app" style="color:#94a3b8">ワークフローパックLP</a>
+</div>
+
+</body>
+</html>
